@@ -1,0 +1,9 @@
+src/
+└── main/
+    ├── java/
+    │   └── com.example.unitconverter/
+    │       └── UnitconverterApplication.java
+    └── resources/
+        ├── static/
+        └── templates/
+            └── index.html
