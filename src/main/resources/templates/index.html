@@ -1,11 +1,19 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
     <title>Unit Converter</title>
-    <link rel="stylesheet" th:href="@{/styles.css}" />
+    <link rel="stylesheet" th:href="@{/style.css}">
 </head>
 <body>
-<h1>Hello, Unit Converter!</h1>
+<h1>Unit Converter</h1>
+<form action="/convert" method="post">
+    <input type="number" name="value" required>
+    <select name="unit">
+        <option value="kgToLb">Kilograms to Pounds</option>
+        <option value="lbToKg">Pounds to Kilograms</option>
+    </select>
+    <button type="submit">Convert</button>
+</form>
+<p th:if="${result != null}">Result: <span th:text="${result}"></span></p>
 </body>
 </html>
