@@ -6,14 +6,34 @@
 </head>
 <body>
 <h1>Unit Converter</h1>
-<form action="/convert" method="post">
-    <input type="number" name="value" required>
-    <select name="unit">
-        <option value="kgToLb">Kilograms to Pounds</option>
-        <option value="lbToKg">Pounds to Kilograms</option>
-    </select>
+<form th:if="${result == null}" action="/convert" method="post">
+    <label for="value">Enter value to convert:</label><br>
+    <input type="number" id="value" name="value" required><br><br>
+
+    <label for="fromUnit">Unit to convert from:</label><br>
+    <select id="fromUnit" name="fromUnit">
+        <th:block th:each="unit : ${units}">
+            <option th:value="${unit}" th:text="${unit}" th:selected="${unit == fromUnit}"></option>
+        </th:block>
+    </select><br><br>
+
+    <label for="toUnit">Unit to convert to:</label><br>
+    <select id="toUnit" name="toUnit">
+        <th:block th:each="unit : ${units}">
+            <option th:value="${unit}" th:text="${unit}" th:selected="${unit == toUnit}"></option>
+        </th:block>
+    </select><br><br>
+
     <button type="submit">Convert</button>
 </form>
-<p th:if="${result != null}">Result: <span th:text="${result}"></span></p>
+
+<!-- Result View -->
+<div th:if="${result != null}">
+    <p>Result of your calculation:</p>
+    <p><strong th:text="${value + ' ' + fromUnit + ' = ' + result + toUnit}"></strong></p>
+    <form action="/" method="get">
+        <button type="submit">Reset</button>
+    </form>
+</div>
 </body>
 </html>
