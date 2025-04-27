@@ -6,9 +6,18 @@
 </head>
 <body>
 <h1>Unit Converter</h1>
+
+<div class="tabs">
+    <a th:href="@{/length}" class="tab" th:classappend="${activeTab == 'length'} ? 'active' : ''">Length</a>
+    <a th:href="@{/weight}" class="tab" th:classappend="${activeTab == 'weight'} ? 'active' : ''">Weight</a>
+    <a th:href="@{/temperature}" class="tab" th:classappend="${activeTab == 'temperature'} ? 'active' : ''">Temperature</a>
+</div>
+
 <form th:if="${result == null}" action="/convert" method="post">
+    <input type="hidden" name="category" th:value="${activeTab.toUpperCase()}">
+
     <label for="value">Enter value to convert:</label><br>
-    <input type="number" id="value" name="value" required><br><br>
+    <input type="number" id="value" name="value" step="any" required><br><br>
 
     <label for="fromUnit">Unit to convert from:</label><br>
     <select id="fromUnit" name="fromUnit">
@@ -35,5 +44,6 @@
         <button type="submit">Reset</button>
     </form>
 </div>
+
 </body>
 </html>

@@ -1,9 +1,15 @@
-src/
-└── main/
-    ├── java/
-    │   └── com.example.unitconverter/
-    │       └── UnitconverterApplication.java
-    └── resources/
-        ├── static/
-        └── templates/
-            └── index.html
+.tabs {
+    margin-bottom: 20px;
+}
+
+.tabs .tab {
+    margin-right: 20px;
+    text-decoration: none;
+    color: black;
+}
+
+.tabs .tab.active {
+    font-weight: bold;
+    text-decoration: underline;
+    color: blue;
+}
