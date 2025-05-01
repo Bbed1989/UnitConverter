@@ -3,47 +3,52 @@
 <head>
     <title>Unit Converter</title>
     <link rel="stylesheet" th:href="@{/style.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-<h1>Unit Converter</h1>
 
-<div class="tabs">
-    <a th:href="@{/length}" class="tab" th:classappend="${activeTab == 'length'} ? 'active' : ''">Length</a>
-    <a th:href="@{/weight}" class="tab" th:classappend="${activeTab == 'weight'} ? 'active' : ''">Weight</a>
-    <a th:href="@{/temperature}" class="tab" th:classappend="${activeTab == 'temperature'} ? 'active' : ''">Temperature</a>
+<div class="page-wrapper">
+
+    <h1>Unit Converter</h1>
+
+    <div class="converter-container">
+        <div class="tabs">
+            <a th:href="@{/length}" class="tab" th:classappend="${activeTab == 'length'} ? 'active' : ''">Length</a>
+            <a th:href="@{/weight}" class="tab" th:classappend="${activeTab == 'weight'} ? 'active' : ''">Weight</a>
+            <a th:href="@{/temperature}" class="tab" th:classappend="${activeTab == 'temperature'} ? 'active' : ''">Temperature</a>
+        </div>
+
+        <form th:if="${result == null}" action="/convert" method="post">
+            <input type="hidden" name="category" th:value="${activeTab.toUpperCase()}">
+
+            <label for="value">Enter value to convert:</label><br>
+            <input type="number" id="value" name="value" step="any" required><br><br>
+
+            <label for="fromUnit">Unit to convert from:</label><br>
+            <select id="fromUnit" name="fromUnit">
+                <th:block th:each="unit : ${units}">
+                    <option th:value="${unit}" th:text="${unit}" th:selected="${unit == fromUnit}"></option>
+                </th:block>
+            </select><br><br>
+
+            <label for="toUnit">Unit to convert to:</label><br>
+            <select id="toUnit" name="toUnit">
+                <th:block th:each="unit : ${units}">
+                    <option th:value="${unit}" th:text="${unit}" th:selected="${unit == toUnit}"></option>
+                </th:block>
+            </select><br><br>
+
+            <button type="submit">Convert</button>
+        </form>
+
+        <div th:if="${result != null}">
+            <p>Result of your calculation:</p>
+            <p><strong th:text="${value + ' ' + fromUnit + ' = ' + result + toUnit}"></strong></p>
+            <form action="/" method="get">
+                <button type="submit">Reset</button>
+            </form>
+        </div>
+    </div>
 </div>
-
-<form th:if="${result == null}" action="/convert" method="post">
-    <input type="hidden" name="category" th:value="${activeTab.toUpperCase()}">
-
-    <label for="value">Enter value to convert:</label><br>
-    <input type="number" id="value" name="value" step="any" required><br><br>
-
-    <label for="fromUnit">Unit to convert from:</label><br>
-    <select id="fromUnit" name="fromUnit">
-        <th:block th:each="unit : ${units}">
-            <option th:value="${unit}" th:text="${unit}" th:selected="${unit == fromUnit}"></option>
-        </th:block>
-    </select><br><br>
-
-    <label for="toUnit">Unit to convert to:</label><br>
-    <select id="toUnit" name="toUnit">
-        <th:block th:each="unit : ${units}">
-            <option th:value="${unit}" th:text="${unit}" th:selected="${unit == toUnit}"></option>
-        </th:block>
-    </select><br><br>
-
-    <button type="submit">Convert</button>
-</form>
-
-<!-- Result View -->
-<div th:if="${result != null}">
-    <p>Result of your calculation:</p>
-    <p><strong th:text="${value + ' ' + fromUnit + ' = ' + result + toUnit}"></strong></p>
-    <form action="/" method="get">
-        <button type="submit">Reset</button>
-    </form>
-</div>
-
 </body>
 </html>
