@@ -19,18 +19,6 @@ A responsive and user-friendly web application for converting between units of *
 
 ![image](https://github.com/user-attachments/assets/bda0af4e-1d70-4b60-8e1d-ce220c99e12f)
 
-
-### 🔁 Length Conversion Tab
-![Length Tab Screenshot](screenshots/length-tab.png)
-
-### ⚖️ Weight Conversion Tab
-![Weight Tab Screenshot](screenshots/weight-tab.png)
-
-### 🌡️ Temperature Conversion Tab
-![Temperature Tab Screenshot](screenshots/temperature-tab.png)
-
-> 📁 Save your screenshots in the `/screenshots/` folder and replace the above paths accordingly.
-
 ---
 
 ## 🛠️ Technologies Used
